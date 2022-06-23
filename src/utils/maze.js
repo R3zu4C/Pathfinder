@@ -1,8 +1,12 @@
-const generate = (grid = [], ROWS = 5, COLS = 5) => {
+const generate = (grid = [], ROWS = 40, COLS = 40) => {
   const EMPTY = 0;
   const WALL = 1;
 
-  //grid: all nodes isWall is true;
+  for(let i = 0; i < grid.length; i++) {
+    for(let j = 0; j < grid[0].length; j++) {
+      grid[i][j].isWall = true;
+    }
+  }
 
   const lookup = (x, y) => {
     if (x < 0 || y < 0 || x >= COLS || y >= ROWS) {
@@ -65,6 +69,8 @@ const generate = (grid = [], ROWS = 5, COLS = 5) => {
       }
     }
   }
+
+  return grid;
 };
 
 export default generate;
