@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Node = ({ row, col, isFinish, isStart, isWall, onNodeClick, onNodeOver, onNodeOut }) => {
+const Node = ({ row, col, isFinish, isStart, isWall, onNodeClick }) => {
   let status = '';
   if (isFinish) status = 'node--finish';
   if (isStart) status = 'node--start';
@@ -11,8 +11,6 @@ const Node = ({ row, col, isFinish, isStart, isWall, onNodeClick, onNodeOver, on
       id={`node-${row}-${col}`}
       className={`node ${status}`}
       onClick={() => onNodeClick(row, col)}
-      onMouseOver={() => onNodeOver(row, col)}
-      onMouseOut={() => onNodeOut(row, col)}
     ></div>
   );
 };
