@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import bfs from "./algorithms/bfs";
 import dfs from "./algorithms/dfs";
+import dijkstra from "./algorithms/dijkstra";
 import Grid from "./components/Grid";
 import generate from "./utils/maze";
 
@@ -131,6 +132,10 @@ const App = () => {
       const [visitedNodesInOrder, nodesInShortestPathOrder] = dfs(grid, startNode, finishNode);
       animatePath(visitedNodesInOrder, nodesInShortestPathOrder);
     }
+    if(algorithm === 'dijkstra') { 
+      const [visitedNodesInOrder, nodesInShortestPathOrder] = dijkstra(grid, startNode, finishNode);
+      animatePath(visitedNodesInOrder, nodesInShortestPathOrder);
+    }
     
   }
 
@@ -145,6 +150,7 @@ const App = () => {
       <select onChange={(e) => setAlgorithm(e.target.value)}>
         <option value={'bfs'}>BFS</option>
         <option value={'dfs'}>DFS</option>
+        <option value={'dijkstra'}>Dijkstra</option>
       </select>
       <button onClick={() => setModifyingState('start')}>Source</button>
       <button onClick={() => setModifyingState('finish')}>Destination</button>
