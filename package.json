@@ -2,7 +2,7 @@
   "name": "pathfinder",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://r3zu4c.github.io",
+  "homepage": "https://r3zu4c.github.io/Pathfinder",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
