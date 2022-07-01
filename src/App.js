@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import astar from "./algorithms/astar";
 import bfs from "./algorithms/bfs";
 import dfs from "./algorithms/dfs";
 import dijkstra from "./algorithms/dijkstra";
@@ -60,6 +61,11 @@ const App = () => {
       isVisited: false,
       previousNode: null,
       distance: Infinity,
+      cost: {
+        F: Infinity,
+        G: Infinity,
+        H: Infinity,
+      },
     }
   }
 
@@ -136,6 +142,10 @@ const App = () => {
       const [visitedNodesInOrder, nodesInShortestPathOrder] = dijkstra(grid, startNode, finishNode);
       animatePath(visitedNodesInOrder, nodesInShortestPathOrder);
     }
+    if(algorithm === 'astar') { 
+      const [visitedNodesInOrder, nodesInShortestPathOrder] = astar(grid, startNode, finishNode);
+      animatePath(visitedNodesInOrder, nodesInShortestPathOrder);
+    }
     
   }
 
@@ -146,18 +156,21 @@ const App = () => {
   return (
     <div className="container">
       <Grid grid={grid} onNodeClick={handleNodeOperation} />
-      <button onClick={() => generateMaze()}>Generate Maze</button>
-      <select onChange={(e) => setAlgorithm(e.target.value)}>
-        <option value={'bfs'}>BFS</option>
-        <option value={'dfs'}>DFS</option>
-        <option value={'dijkstra'}>Dijkstra</option>
-      </select>
-      <button onClick={() => setModifyingState('start')}>Source</button>
-      <button onClick={() => setModifyingState('finish')}>Destination</button>
-      <button onClick={() => setModifyingState('wall')}>Wall</button>
-      <button onClick={() => findShortestPath()}>Find Path</button>
-      <button onClick={() => clearPath()}>Clear Path</button>
-      <button onClick={() => clearBoard()}>Clear Board</button>
+      <div>
+        <button onClick={() => generateMaze()}>Generate Maze</button>
+        <select onChange={(e) => setAlgorithm(e.target.value)}>
+          <option value={'bfs'}>BFS</option>
+          <option value={'dfs'}>DFS</option>
+          <option value={'dijkstra'}>Dijkstra</option>
+          <option value={'astar'}>A*</option>
+        </select>
+        <button onClick={() => setModifyingState('start')}>Source</button>
+        <button onClick={() => setModifyingState('finish')}>Destination</button>
+        <button onClick={() => setModifyingState('wall')}>Wall</button>
+        <button onClick={() => findShortestPath()}>Find Path</button>
+        <button onClick={() => clearPath()}>Clear Path</button>
+        <button onClick={() => clearBoard()}>Clear Board</button>
+      </div>
     </div>
   );
 }
