@@ -3,6 +3,7 @@ import astar from "./algorithms/astar";
 import bfs from "./algorithms/bfs";
 import dfs from "./algorithms/dfs";
 import dijkstra from "./algorithms/dijkstra";
+import ComplexityTable from "./components/ComplexityTable";
 import Grid from "./components/Grid";
 import generate from "./utils/maze";
 
@@ -156,20 +157,24 @@ const App = () => {
   return (
     <div className="container">
       <Grid grid={grid} onNodeClick={handleNodeOperation} />
-      <div>
-        <button onClick={() => generateMaze()}>Generate Maze</button>
-        <select onChange={(e) => setAlgorithm(e.target.value)}>
-          <option value={'bfs'}>BFS</option>
-          <option value={'dfs'}>DFS</option>
-          <option value={'dijkstra'}>Dijkstra</option>
-          <option value={'astar'}>A*</option>
-        </select>
-        <button onClick={() => setModifyingState('start')}>Source</button>
-        <button onClick={() => setModifyingState('finish')}>Destination</button>
-        <button onClick={() => setModifyingState('wall')}>Wall</button>
-        <button onClick={() => findShortestPath()}>Find Path</button>
-        <button onClick={() => clearPath()}>Clear Path</button>
-        <button onClick={() => clearBoard()}>Clear Board</button>
+      <div className="toolbar">
+        <div className="buttons">
+          <select className="select-algorithm" onChange={(e) => setAlgorithm(e.target.value)}>
+            <option disabled value={""}>Select Algorithm</option>
+            <option value={'bfs'}>BFS</option>
+            <option value={'dfs'}>DFS</option>
+            <option value={'dijkstra'}>Dijkstra</option>
+            <option value={'astar'}>A* Search</option>
+          </select>
+          <button className="button-maze" onClick={() => generateMaze()}>Generate Maze</button>
+          <button className="button-source" onClick={() => setModifyingState('start')}>Source</button>
+          <button className="button-destination" onClick={() => setModifyingState('finish')}>Destination</button>
+          <button className="button-wall" onClick={() => setModifyingState('wall')}>Wall</button>
+          <button className="button-findpath" onClick={() => findShortestPath()}>Find Path</button>
+          <button className="button-clearpath" onClick={() => clearPath()}>Clear Path</button>
+          <button className="button-clearboard" onClick={() => clearBoard()}>Clear Board</button>
+        </div>
+        <ComplexityTable />
       </div>
     </div>
   );
